@@ -1,0 +1,14 @@
+{
+  "name": "gulp-bd-cache",
+  "version": "1.0.0",
+  "description": "对gulp编译过的文件进行缓存，避免多余的编译",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "through2": "^4.0.2"
+  }
+}
