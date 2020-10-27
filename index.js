@@ -4,11 +4,13 @@ const fs = require('fs')
 const path = require('path')
 const cacheJson = require('./cache.json')
 
+let tid;
+
  /**
   * 对目标目录作缓存，存在更改时才编译
   * @param {number} delayWrite 等待多少ms，再写入到硬盘
   */
-const cacheMethod = (delayWrite = 100) => {
+const cacheMethod = (delayWrite = 500) => {
   return through.obj((file, enc, cb) => {
     const { path: _path, relative, } = file
     const { mtimeMs, } = fs.statSync(_path)
@@ -31,9 +33,10 @@ const cacheMethod = (delayWrite = 100) => {
 
 function writeJson(relative, mtimeMs, delayWrite) {
   cacheJson[relative] = mtimeMs
-  setTimeout(() => {
-    fs.createWriteStream(path.resolve(__dirname, `./cache.json`)).write(JSON.stringify(cacheJson))
-  }, 100)
+  clearTimeout(tid)
+  tid = setTimeout(() => {
+    fs.createWriteStream(path.resolve(__dirname, `./cache.json`)).write(JSON.stringify(cacheJson || {}))
+  }, delayWrite)
 }
 
 module.exports = cacheMethod
