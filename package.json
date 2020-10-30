@@ -1,6 +1,6 @@
 {
   "name": "gulp-bd-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "对gulp编译过的文件进行缓存，避免多余的编译",
   "main": "index.js",
   "scripts": {},
