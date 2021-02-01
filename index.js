@@ -19,7 +19,7 @@ const cacheMethod = (open = true, delayWrite = 500) => {
     const { mtimeMs } = fs.statSync(_path);
     if (open && cacheJson[relative]) {
       // 文件存在更改
-      if (mtimeMs > cacheJson[relative]) {
+      if (mtimeMs !== cacheJson[relative]) {
         writeJson(relative, mtimeMs, delayWrite);
         cb(null, file);
       } else {
